@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<div id="myDIV" class="header">
+  <h2>My To Do List</h2>
+  <form action="{% url 'add' %}" method="POST" role="form" id="myInput">
+	{% csrf_token %}
+	<div>
+ 	{{ form.text }}
+ 	
+ 	</div>
+	
+	</form>
+	 <button class="addBtn">ADD</button>
+
+	<a href="{% url 'deleteCompleted' %}"><button class="addBtn">DELETE COMPLETED</button></a>
+ 	<a href="{% url 'deleteAll' %}"><button class="addBtn">DELETE ALL TASKS</button></a>
+</div>
+
+<ul id="myUL">
+  {% for todo in to_do %}
+		{% if todo.complete %}
+			<li>{{ todo.text }}</li>
+		{% else %}
+			<a href="{% url 'checked' todo.id %}">
+		    <li>{{ todo.text }}</li></a>
+		{% endif %} 					
+		{% endfor %}
+</ul>
+ 
+   
+   
+ 
+	
+ 					
+    
+</html>
